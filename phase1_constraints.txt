@@ -1,0 +1,6 @@
+CS 4400 - Phase 1
+Semantic Constraints
+1. Only One price may be chosen per ticket (first or second class)
+2. A customer must enter a train number and rating when writing a review
+3. A manager cannot purchase tickets
+4. A customer cannot view cancelled reservations
