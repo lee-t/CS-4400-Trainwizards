@@ -1,0 +1,9 @@
+import pymysql
+
+
+try:
+    DB = pymysql.connect(host="academic-mysql.cc.gatech.edu",
+                                    user = "cs4400_Team_68",passwd="Glk20Zjm",
+                                     db="cs4400_Team_68")
+except:
+    print("ERROR")
