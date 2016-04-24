@@ -6,7 +6,7 @@ import pymysql
 
    author:  Evan Bailey
    date:    2016-04-24
-   version: 1.0
+   version: 1.1
 
    This file provides various functions to aide in fetching data from
    the "trainwizards" database. It is part of the 3rd phase of our
@@ -326,7 +326,7 @@ def getPopularRoutes(num): #{
     sql = "SELECT Month(departureDate) AS Month, tTrainNum, "\
           "COUNT(tReservationID) FROM Ticket INNER JOIN Reservation ON "\
           "Ticket.tReservationID = Reservation.reservationID WHERE "\
-          "isCancelled = 0 GROUP BY Month, tTrainNum ORDER BY Month;"
+          "isCancelled = 0 GROUP BY Month, tTrainNum ORDER BY Month;"\
     replies = _cursor.execute(sql)
     retval = [[] for i in range(12)] # makes a list of 12 lists
     months = [[] for i in range(12)]
@@ -360,22 +360,21 @@ def getPopularRoutes(num): #{
 #
 # Retrieves the revenue report based on the current database state.
 #
-# Returns a 12-element list holding the revenue earned for each month, where
-# the index denotes the month
+# Note: monthNum starts at 1 and goes to 12
+#
+# Returns a 3-element list holding tuples with the following format:
+#     (monthNum, revenueEarned)
 # --------------------------------------
 def getRevenueReport(): #{
     sql = "SELECT Month(departureDate) AS Month, SUM(Price) AS Revenue FROM "\
-          "Ticket GROUP BY Month ORDER BY Month;"
+          "Ticket GROUP BY Month ORDER BY Month LIMIT 3;"
     replies = _cursor.execute(sql)
     retval = []
     
-    for i in range(12): #{
-        if i < replies: #{
-            retval.append(float(_cursor.fetchone()[1]))
-        #}
-        else: #{
-            retval.append(float(0))
-        #}
+    for i in range(replies): #{
+        reply = _cursor.fetchone()
+
+        retval.append((reply[0], float(reply[1])))
     #}
     
     return retval
