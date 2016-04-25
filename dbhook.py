@@ -326,7 +326,7 @@ def getPopularRoutes(num): #{
     sql = "SELECT Month(departureDate) AS Month, tTrainNum, "\
           "COUNT(tReservationID) FROM Ticket INNER JOIN Reservation ON "\
           "Ticket.tReservationID = Reservation.reservationID WHERE "\
-          "isCancelled = 0 GROUP BY Month, tTrainNum ORDER BY Month;"\
+          "isCancelled = 0 GROUP BY Month, tTrainNum ORDER BY Month;"
     replies = _cursor.execute(sql)
     retval = [[] for i in range(12)] # makes a list of 12 lists
     months = [[] for i in range(12)]
