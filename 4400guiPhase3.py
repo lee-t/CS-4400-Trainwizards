@@ -71,7 +71,7 @@ class GTtrain:
         dbhook.setupConnection()
         
     def checkLogin(self):
-        user=self.Entryusr.get()
+        self.user=self.Entryusr.get()
         pswd=self.Entrypwd.get()
         if dbhook.checkLogin(user, pswd):
             if dbhook.checkMan(user):
@@ -80,6 +80,7 @@ class GTtrain:
                 self.toCustWin()
         else:
             messagebox.showerror('Error', 'Invalid Username and/or Password')
+    
     def toManagerWin(self):
         print("manger")
 
@@ -146,6 +147,14 @@ class GTtrain:
     def gotoMain(self):
         self.add.destroy()
         self.window.deiconify()
+        
+    def insertStudent(self):
+        if self.schoolE.get()[-3,] = 'edu':
+            dbhook.setStudent(self.user)
+            
+            self.gotoMain()
+        else:
+            messagebox.showerror('Error', 'Email does not end in .edu')
         
         
 
