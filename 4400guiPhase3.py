@@ -149,7 +149,7 @@ class GTtrain:
         self.window.deiconify()
         
     def insertStudent(self):
-        if self.schoolE.get()[-3,] = 'edu':
+        if self.schoolE.get()[-3,] == 'edu':
             dbhook.setStudent(self.user)
             
             self.gotoMain()
